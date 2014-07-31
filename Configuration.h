@@ -106,7 +106,7 @@
 #define AUTOCAL_PROBERATE 35 // mm/sec
 
 //Amount to lift head after probing a point
-#define AUTOCAL_PROBELIFT 20 // mm  //######FIXME//######FIXME//######FIXME
+#define AUTOCAL_PROBELIFT 10 // mm  //######FIXME//######FIXME//######FIXME Large lift to avoid scraping etc.
 
 
 
