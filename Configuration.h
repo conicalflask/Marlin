@@ -9,7 +9,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(RichCattell, Mini Kossel)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(RichCattell, ConicalFlask)" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -17,7 +17,7 @@
 #define SERIAL_PORT 0
 
 // This determines the communication speed of the printer
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 //#define BAUDRATE 115200
 
 //// The following define selects which electronics board you have. Please choose the one that matches your setup
@@ -59,7 +59,7 @@
 #endif
 
 // Define this to set a custom name for your generic Mendel,
-#define CUSTOM_MENDEL_NAME "Kossel"
+#define CUSTOM_MENDEL_NAME "Chaossel"
 
 // This defines the number of extruders
 #define EXTRUDERS 1
@@ -167,10 +167,10 @@
 // 52 is 200k thermistor - ATC Semitec 204GT-2 (1k pullup)
 // 55 is 100k thermistor - ATC Semitec 104GT-2 (Used in ParCan) (1k pullup)
 
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 5
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
-#define TEMP_SENSOR_BED 0
+#define TEMP_SENSOR_BED 1
 
 // This makes temp sensor 1 a redundant sensor for sensor 0. If the temperatures difference between these sensors is to high the print will be aborted.
 //#define TEMP_SENSOR_1_AS_REDUNDANT
@@ -184,6 +184,7 @@
 // The minimal temperature defines the temperature below which the heater will not be enabled It is used
 // to check that the wiring to the thermistor is not broken.
 // Otherwise this would lead to the heater being powered on all the time.
+
 #define HEATER_0_MINTEMP 5
 #define HEATER_1_MINTEMP 5
 #define HEATER_2_MINTEMP 5
@@ -216,11 +217,27 @@
   #define K1 0.95 //smoothing factor within the PID
   #define PID_dT ((16.0 * 8.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
+
+// Kp: 36.79
+// Ki: 4.49
+// Kd: 75.35
+
+//J-Head 12v 5.6ohm hotends.com 200c
+    #define  DEFAULT_Kp 36.79
+    #define  DEFAULT_Ki 4.49
+    #define  DEFAULT_Kd 75.35
+
+
 // If you are using a preconfigured hotend then you can use one of the value sets by uncommenting it
 // J-Head with 12v 40W heater cartridge
-    #define  DEFAULT_Kp 15.34
-    #define  DEFAULT_Ki 1.57
-    #define  DEFAULT_Kd 37.45
+//    #define  DEFAULT_Kp 15.34
+//    #define  DEFAULT_Ki 1.57
+//    #define  DEFAULT_Kd 37.45
+
+//J-Head 12v 100c 5.6ohm
+// Kp: 29.14
+// Ki: 3.11
+// Kd: 68.28
 
 // Makergear
 //    #define  DEFAULT_Kp 7.0
@@ -243,7 +260,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+#define PIDTEMPBED
 //
 //#define BED_LIMIT_SWITCHING
 
@@ -254,26 +271,24 @@
 #define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
 
 #ifdef PIDTEMPBED
-//120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-    #define  DEFAULT_bedKp 10.00
-    #define  DEFAULT_bedKi .023
-    #define  DEFAULT_bedKd 305.4
 
-//120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
-//from pidautotune
-//    #define  DEFAULT_bedKp 97.1
-//    #define  DEFAULT_bedKi 1.41
-//    #define  DEFAULT_bedKd 1675.16
+    //GP: tuned for the homemade 200w aluminium monster.
+    #define  DEFAULT_bedKp 93.35
+    #define  DEFAULT_bedKi 1.52
+    #define  DEFAULT_bedKd 1430.09
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
-
+//GP: FIXME FIXME #####################################################################################################################################################################################################################################
+//GP: FIXME FIXME #####################################################################################################################################################################################################################################
+//GP: FIXME FIXME #####################################################################################################################################################################################################################################
+//GP: FIXME FIXME #####################################################################################################################################################################################################################################
+// this must be re-enabled before commissioning!
 
 //this prevents dangerous Extruder moves, i.e. if the temperature is under the limit
 //can be software-disabled for whatever purposes by
-#define PREVENT_DANGEROUS_EXTRUDE
+//#define PREVENT_DANGEROUS_EXTRUDE
 //if PREVENT_DANGEROUS_EXTRUDE is on, you can still disable (uncomment) very long bits of extrusion separately.
 #define PREVENT_LENGTHY_EXTRUDE
 
@@ -413,13 +428,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define EEPROM_CHITCHAT
 
 // Preheat Constants
-#define PLA_PREHEAT_HOTEND_TEMP 180
-#define PLA_PREHEAT_HPB_TEMP 70
+#define PLA_PREHEAT_HOTEND_TEMP 150
+#define PLA_PREHEAT_HPB_TEMP 60
 #define PLA_PREHEAT_FAN_SPEED 255   // Insert Value between 0 and 255
 
-#define ABS_PREHEAT_HOTEND_TEMP 240
+#define ABS_PREHEAT_HOTEND_TEMP 150
 #define ABS_PREHEAT_HPB_TEMP 100
-#define ABS_PREHEAT_FAN_SPEED 255   // Insert Value between 0 and 255
+#define ABS_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
 
 //LCD and SD support
 //#define ULTRA_LCD  //general lcd support, also 16x2
@@ -446,7 +461,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 // ==> REMEMBER TO INSTALL U8glib to your ARDUINO library folder: http://code.google.com/p/u8glib/wiki/u8glib
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 // The RepRapWorld REPRAPWORLD_KEYPAD v1.1
 // http://reprapworld.com/?products_details&products_id=202&cPath=1591_1626
