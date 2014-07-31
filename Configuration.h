@@ -86,10 +86,10 @@
 #define DEFAULT_DELTA_DIAGONAL_ROD 217.5 // mm
 
 // Horizontal offset from middle of printer to smooth rod center.
-#define DELTA_SMOOTH_ROD_OFFSET 156.4 // mm //158
+#define DELTA_SMOOTH_ROD_OFFSET 152 //156.4 // mm //158
 
 // Horizontal offset of the universal joints on the end effector.
-#define DELTA_EFFECTOR_OFFSET 24 // mm 
+#define DELTA_EFFECTOR_OFFSET 21 // mm 
 
 // Horizontal offset of the universal joints on the carriages.
 #define DELTA_CARRIAGE_OFFSET 24 // mm  
@@ -98,13 +98,35 @@
 #define DEFAULT_DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-DELTA_EFFECTOR_OFFSET-DELTA_CARRIAGE_OFFSET)
 
 //Uncomment to enable autocalibration debug messages
-//#define DEBUG_MESSAGES
+#define DEBUG_MESSAGES
+
+//Speed for autocalibration travel and probing moves
+#define AUTOCAL_TRAVELRATE 500 // mm/sec
+#define AUTOCAL_PROBERATE 35 // mm/sec
+
+//Amount to lift head after probing a point
+#define AUTOCAL_PROBELIFT 2 // mm
 
 // Precision for G30 delta autocalibration function
 #define AUTOCALIBRATION_PRECISION 0.03 // mm
 
 // Diameter of print bed - this is used to set the distance that autocalibration probes the bed at.
 #define BED_DIAMETER 170 // mm
+
+//Endstop Offset Adjustment - All values are in mm and must be negative (to move down away from endstop switches) 
+#define TOWER_A_ENDSTOP_ADJ 0 // Front Left Tower
+#define TOWER_B_ENDSTOP_ADJ 0 // Front Right Tower
+#define TOWER_C_ENDSTOP_ADJ 0 // Rear Tower
+
+//Tower Position Adjustment - Adj x Degrees around delta radius (- move clockwise / + move anticlockwise)
+#define TOWER_A_POSITION_ADJ 0 //Front Left Tower
+#define TOWER_B_POSITION_ADJ 0 //Front Right Tower
+#define TOWER_C_POSITION_ADJ 0 //Rear Tower
+
+//Tower Radius Adjustment - Adj x mm in/out from centre of printer (- move in / + move out)
+#define TOWER_A_RADIUS_ADJ 0 //Front Left Tower
+#define TOWER_B_RADIUS_ADJ 0 //Front Right Tower
+#define TOWER_C_RADIUS_ADJ 0 //Rear Tower
 
 // Z-Probe variables
 // Start and end location values are used to deploy/retract the probe (will move from start to end and back again) 
