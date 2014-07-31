@@ -1,6 +1,11 @@
 Marlin
 ======
 
+This version of Marlin has been configured for ConicalFlask's printer and general setup. It is not intended for release but might be helpful anyway. For the curious, this firmware is for a slightly larger than usual Kossel Mini and will eventually contain support for WS2812 LED strips (via the glorious FastLED library) for printer lighting.
+
+Now to business...
+------
+
 Marlin Firmware with Delta autocalibration and various other updates/fixes
 
 This version has a much improved auto-calibration function which will hopefully be able to cope with many more printer configuration errors than previous versions were capable of resolving.

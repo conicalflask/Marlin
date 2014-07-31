@@ -9,7 +9,7 @@
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
 #define STRING_VERSION_CONFIG_H __DATE__ " " __TIME__ // build date and time
-#define STRING_CONFIG_H_AUTHOR "(RichCattell, ConicalFlask)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "ConicalFlask" // Who made the changes.
 
 // SERIAL_PORT selects which serial port should be used for communication with the host.
 // This allows the connection of wireless adapters (for instance) to non-default port pins.
@@ -77,22 +77,23 @@
 // Enable DELTA kinematics
 #define DELTA
 
+
 // Make delta curves from many straight lines (linear interpolation).
 // This is a trade-off between visible corners (not enough segments)
 // and processor overload (too many expensive sqrt calls).
 #define DELTA_SEGMENTS_PER_SECOND 200
 
 // Center-to-center distance of the holes in the diagonal push rods.
-#define DEFAULT_DELTA_DIAGONAL_ROD 217.5 // mm
+#define DEFAULT_DELTA_DIAGONAL_ROD 313.5 // mm   //######FIXME//######FIXME//######FIXME
 
 // Horizontal offset from middle of printer to smooth rod center.
-#define DELTA_SMOOTH_ROD_OFFSET 152 //156.4 // mm //158
+#define DELTA_SMOOTH_ROD_OFFSET 220 // mm //158  //######FIXME//######FIXME//######FIXME
 
 // Horizontal offset of the universal joints on the end effector.
-#define DELTA_EFFECTOR_OFFSET 21 // mm 
+#define DELTA_EFFECTOR_OFFSET 24 // mm   //######FIXME//######FIXME//######FIXME
 
 // Horizontal offset of the universal joints on the carriages.
-#define DELTA_CARRIAGE_OFFSET 24 // mm  
+#define DELTA_CARRIAGE_OFFSET 15 // mm  //######FIXME//######FIXME//######FIXME
 
 // Effective horizontal distance bridged by diagonal push rods.
 #define DEFAULT_DELTA_RADIUS (DELTA_SMOOTH_ROD_OFFSET-DELTA_EFFECTOR_OFFSET-DELTA_CARRIAGE_OFFSET)
@@ -105,13 +106,16 @@
 #define AUTOCAL_PROBERATE 35 // mm/sec
 
 //Amount to lift head after probing a point
-#define AUTOCAL_PROBELIFT 2 // mm
+#define AUTOCAL_PROBELIFT 20 // mm  //######FIXME//######FIXME//######FIXME
+
+
 
 // Precision for G30 delta autocalibration function
-#define AUTOCALIBRATION_PRECISION 0.03 // mm
+#define AUTOCALIBRATION_PRECISION 0.1 // mm  //######FIXME//######FIXME//######FIXME//######FIXME (duing experiment phase accept poor calibration... still beats the mendel... heh)
 
 // Diameter of print bed - this is used to set the distance that autocalibration probes the bed at.
-#define BED_DIAMETER 170 // mm
+#define BED_DIAMETER 200 // mm (smaller than the actual bed diameter. (281mm) //######FIXME//######FIXME (make larger after experimentation)
+
 
 //Endstop Offset Adjustment - All values are in mm and must be negative (to move down away from endstop switches) 
 #define TOWER_A_ENDSTOP_ADJ 0 // Front Left Tower
@@ -129,12 +133,17 @@
 #define TOWER_C_RADIUS_ADJ 0 //Rear Tower
 
 // Z-Probe variables
-// Start and end location values are used to deploy/retract the probe (will move from start to end and back again) 
-#define Z_PROBE_OFFSET {0, 10, -5.6, 0}  // X, Y, Z, E distance between hotend nozzle and deployed bed leveling probe.
+// Start and end location values are used to deploy/retract the probe (will move from start to end and back again)
+
+
+//######FIXME//######FIXME//######FIXME//######FIXME //######FIXME//######FIXME//######FIXME//######FIXME
+// these are all test values.
+//######FIXME//######FIXME//######FIXME//######FIXME //######FIXME//######FIXME//######FIXME//######FIXME
+#define Z_PROBE_OFFSET {0, 10, -2, 0}  // X, Y, Z, E distance between hotend nozzle and deployed bed leveling probe.
 #define Z_PROBE_DEPLOY_START_LOCATION {20, 96, 30, 0}   // X, Y, Z, E start location for z-probe deployment sequence
 #define Z_PROBE_DEPLOY_END_LOCATION {5, 96, 30, 0} 	  // X, Y, Z, E end location for z-probe deployment sequence
 #define Z_PROBE_RETRACT_START_LOCATION {49, 84, 20, 0}  // X, Y, Z, E start location for z-probe retract sequence
-#define Z_PROBE_RETRACT_END_LOCATION {49, 84, 1, 0}     // X, Y, Z, E end location for z-probe retract sequence 
+#define Z_PROBE_RETRACT_END_LOCATION {49, 84, 19, 0}     // X, Y, Z, E end location for z-probe retract sequence
 
 #define AUTOLEVEL_GRID 24 // Distance between autolevel Z probing points, should be less than print surface radius/3.
 
@@ -222,7 +231,7 @@
 // Ki: 4.49
 // Kd: 75.35
 
-//J-Head 12v 5.6ohm hotends.com 200c
+//CF: J-Head 12v 5.6ohm hotends.com 200c
     #define  DEFAULT_Kp 36.79
     #define  DEFAULT_Ki 4.49
     #define  DEFAULT_Kd 75.35
@@ -272,23 +281,18 @@
 
 #ifdef PIDTEMPBED
 
-    //GP: tuned for the homemade 200w aluminium monster.
-    #define  DEFAULT_bedKp 93.35
-    #define  DEFAULT_bedKi 1.52
-    #define  DEFAULT_bedKd 1430.09
+	//CF: tuned for the homemade 24v 2.8ohm 206w aluminium monster.
+	#define  DEFAULT_bedKp 93.35
+	#define  DEFAULT_bedKi 1.52
+	#define  DEFAULT_bedKd 1430.09
 
 // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
 
-//GP: FIXME FIXME #####################################################################################################################################################################################################################################
-//GP: FIXME FIXME #####################################################################################################################################################################################################################################
-//GP: FIXME FIXME #####################################################################################################################################################################################################################################
-//GP: FIXME FIXME #####################################################################################################################################################################################################################################
-// this must be re-enabled before commissioning!
 
 //this prevents dangerous Extruder moves, i.e. if the temperature is under the limit
 //can be software-disabled for whatever purposes by
-//#define PREVENT_DANGEROUS_EXTRUDE
+#define PREVENT_DANGEROUS_EXTRUDE
 //if PREVENT_DANGEROUS_EXTRUDE is on, you can still disable (uncomment) very long bits of extrusion separately.
 #define PREVENT_LENGTHY_EXTRUDE
 
@@ -367,10 +371,10 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define min_software_endstops true // If true, axis won't move to coordinates less than HOME_POS.
 #define max_software_endstops true  // If true, axis won't move to coordinates greater than the defined lengths below.
 // Travel limits after homing
-#define X_MAX_POS 90
-#define X_MIN_POS -90
-#define Y_MAX_POS 90
-#define Y_MIN_POS -90
+#define X_MAX_POS 110
+#define X_MIN_POS -110
+#define Y_MAX_POS 110
+#define Y_MIN_POS -110
 #define Z_MAX_POS MANUAL_Z_HOME_POS
 #define Z_MIN_POS 0
 
@@ -386,7 +390,8 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // For deltabots this means top and center of the cartesian print volume.
 #define MANUAL_X_HOME_POS 0
 #define MANUAL_Y_HOME_POS 0
-#define MANUAL_Z_HOME_POS 258  // For delta: Distance between nozzle and print surface after homing.
+//######FIXME//######FIXME//######FIXME//######FIXME
+#define MANUAL_Z_HOME_POS 330   // For delta: Distance between nozzle and print surface after homing.
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
@@ -394,12 +399,13 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
 // default settings
 
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {80, 80, 80, 439.5}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100, 100, 100, 596}
 #define DEFAULT_MAX_FEEDRATE          {200, 200, 200, 200}    // (mm/sec)
 #define DEFAULT_MAX_ACCELERATION      {9000,9000,9000,9000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  3000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
+//######FIXME//######FIXME slowed for experimentation phase
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  1000   // X, Y, Z and E max acceleration in mm/s^2 for retracts
 
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
@@ -408,9 +414,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // #define EXTRUDER_OFFSET_Y {0.0, 5.00}  // (in mm) for each extruder, offset of the hotend on the Y axis
 
 // The speed change that does not require acceleration (i.e. the software might assume it can be done instantaneously)
-#define DEFAULT_XYJERK                20.0    // (mm/sec)
-#define DEFAULT_ZJERK                 20.0    // (mm/sec)
-#define DEFAULT_EJERK                 20.0    // (mm/sec)
+#define DEFAULT_XYJERK                5.0    // (mm/sec)
+#define DEFAULT_ZJERK                 5.0    // (mm/sec) //######FIXME//######FIXME//######FIXME//######FIXME low jerk during experimentation.
+#define DEFAULT_EJERK                 5.0    // (mm/sec)
 
 //===========================================================================
 //=============================Additional Features===========================
@@ -427,14 +433,16 @@ const bool Z_MAX_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 // please keep turned on if you can.
 #define EEPROM_CHITCHAT
 
+
 // Preheat Constants
-#define PLA_PREHEAT_HOTEND_TEMP 150
+#define PLA_PREHEAT_HOTEND_TEMP 180
 #define PLA_PREHEAT_HPB_TEMP 60
 #define PLA_PREHEAT_FAN_SPEED 255   // Insert Value between 0 and 255
 
-#define ABS_PREHEAT_HOTEND_TEMP 150
+#define ABS_PREHEAT_HOTEND_TEMP 210
 #define ABS_PREHEAT_HPB_TEMP 100
 #define ABS_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
+
 
 //LCD and SD support
 //#define ULTRA_LCD  //general lcd support, also 16x2
